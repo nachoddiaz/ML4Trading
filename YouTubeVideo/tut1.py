@@ -53,7 +53,29 @@ first = close.iloc[0]
 #iloc[0] toma el primer valor de la columna,
 #Si pusieramos ilos[0,0] cogeria el primer valor de la primera columna
 close.div(first).mul(100).plot()
-print()
+
 
 
 # %%
+#We are going to calculate the daily return of each stock
+daily_return_apple = close["AAPL"].pct_change(1)
+#pct_change(1) calcula el cambio porcentual de cada valor con respecto al anterior  
+daily_return = close.pct_change(1)
+#Esto calcularía el retorno medio diario de Apple
+print(daily_return_apple.mean())
+#plt.plot(daily_return_apple)
+plt.plot(daily_return_apple)
+
+# %%
+#Calculo la media movil de n periodos
+#Si n=30, tenemos el retorno medio mensual
+n=1000
+MovAvg=pd.Series(daily_return_apple).rolling (window = n).mean().iloc[n-1:].values
+plt.plot(MovAvg)
+# %%
+#La función .shift() desplaza los valores el número de periodos que le indiquemos
+
+
+
+
+
